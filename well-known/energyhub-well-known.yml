@@ -1,0 +1,58 @@
+generated: '2026-07-27'
+method: searched
+source: live anonymous HTTP probes of every EnergyHub host in apis.yml
+summary: |
+  No RFC 8615 well-known document of any kind is published by EnergyHub. Four hosts were
+  probed for the six discovery documents this pipeline looks for. www.energyhub.com and
+  api.energyhub.com return a hard 404 for every path. mec.energyhub.com (the live Mercury
+  Edge Connect host) returns HTTP 400 "No required SSL certificate was sent" for every path,
+  because nginx terminates the connection before routing - mutual-TLS client-certificate
+  enforcement, so nothing can be read anonymously there. help.energyhub.com returns HTTP 200
+  for every path, but the body in every case is the ClickHelp portal Okta login page
+  (text/html, ~7.9 KB, <title>Login</title>) - a soft 404, not a discovery document.
+  Result: zero well-known documents found. No security.txt, no OIDC discovery, no OAuth
+  authorization-server metadata, no api-catalog, no ai-plugin.json. Recorded as evidenced
+  absence; no WellKnown or SecurityTxt pointer is wired in apis.yml because nothing exists.
+hosts:
+- host: https://www.energyhub.com
+  role: corporate website
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/oauth-protected-resource, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+- host: https://help.energyhub.com
+  role: ClickHelp knowledge base (energyhub.clickhelp.co)
+  note: Every path returns HTTP 200 with the ClickHelp Okta login HTML page - soft 404.
+    No document was actually served.
+  documents:
+  - {path: /.well-known/security.txt, status: 200, soft_404: true, content_type: text/html}
+  - {path: /.well-known/openid-configuration, status: 200, soft_404: true, content_type: text/html}
+  - {path: /.well-known/oauth-authorization-server, status: 200, soft_404: true, content_type: text/html}
+  - {path: /.well-known/oauth-protected-resource, status: 200, soft_404: true, content_type: text/html}
+  - {path: /.well-known/api-catalog, status: 200, soft_404: true, content_type: text/html}
+  - {path: /.well-known/ai-plugin.json, status: 200, soft_404: true, content_type: text/html}
+- host: https://api.energyhub.com
+  role: resolves and serves TLS, every path 404s - no API found
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/oauth-protected-resource, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+- host: https://mec.energyhub.com
+  role: live Mercury Edge Connect runtime, mutual-TLS gated
+  note: 'nginx returns 400 "No required SSL certificate was sent" for every path; anonymous
+    discovery is impossible by design.'
+  documents:
+  - {path: /.well-known/security.txt, status: 400}
+  - {path: /.well-known/openid-configuration, status: 400}
+  - {path: /.well-known/oauth-authorization-server, status: 400}
+  - {path: /.well-known/oauth-protected-resource, status: 400}
+  - {path: /.well-known/api-catalog, status: 400}
+  - {path: /.well-known/ai-plugin.json, status: 400}
+documents_found: 0
+security_txt: false

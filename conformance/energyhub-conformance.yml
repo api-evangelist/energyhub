@@ -1,0 +1,90 @@
+generated: '2026-07-27'
+method: searched
+source: EnergyHub public statements plus live probes; no OpenAPI exists to derive from
+note: |
+  EnergyHub publishes no machine-readable contract, so nothing here is derived from a spec.
+  Every entry below is either a verbatim vendor statement (recorded as claimed, not certified)
+  or a probe result. Standards that were specifically checked and NOT found are recorded with
+  conforms: false so a later round does not re-litigate them. No compliance program, audit
+  report, or certification of any kind (SOC 2, ISO 27001, PCI DSS, HIPAA, FedRAMP) is published
+  on any EnergyHub property - only GDPR/CCPA rights language inside the privacy policy - so no
+  `Compliance` pointer is wired in apis.yml.
+standards:
+- id: openadr
+  conforms: claimed
+  certified: false
+  evidence: |
+    EnergyHub's 2021-02-18 Mercury Edge Connect announcement states verbatim: "The API is based
+    on the Open ADR standard, with enhanced functionality around automated enrollment,
+    monitoring, and other functionality required for managing enterprise-wide portfolios of
+    grid-edge and customer-owned DERs."
+  source: https://www.energyhub.com/news/mercury-edge-connect-announcement
+  version: not stated by EnergyHub - the announcement names "Open ADR" with no version or profile
+  caveat: No EnergyHub entry was found in an OpenADR Alliance certified-product listing. Treat
+    this as a vendor statement, not a certification.
+- id: mutual-tls
+  conforms: true
+  evidence: 'https://mec.energyhub.com returns HTTP 400 "No required SSL certificate was sent"
+    (nginx) for every anonymous path - server-enforced X.509 client-certificate authentication.
+    Re-confirmed 2026-07-27.'
+  source: authentication/energyhub-authentication.yml
+- id: rest
+  conforms: claimed
+  evidence: 'The utility-integrations page states: "EnergyHub creates a gateway layer that
+    simplifies complexity into REST APIs. This integration layer is separated from the core
+    platform and then synchronizes between EnergyHub REST APIs and utility systems."'
+  source: https://www.energyhub.com/edge-derms-platform/utility-integrations
+  caveat: No base URI, resource model, media type, or documentation for this REST layer is public.
+- id: tls-1-3
+  conforms: true
+  evidence: www.energyhub.com and mec.energyhub.com both negotiate TLSv1.3
+  source: security/energyhub-domain-security.yml
+- id: oauth2
+  conforms: false
+  evidence: No authorization server, token endpoint, scope reference, or OAuth documentation
+    found on any host.
+- id: openid-connect
+  conforms: false
+  evidence: No /.well-known/openid-configuration on any API host. Okta SSO protects the
+    documentation portal only and exposes no discovery document.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: No error responses are observable anonymously; nginx returns an HTML 400 body.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt returns 404 on every host (400 on the mTLS host).
+- id: openapi
+  conforms: false
+  evidence: No OpenAPI or Swagger document found at any probed path on any host, in the
+    GitHub organization, or via any public index.
+- id: asyncapi
+  conforms: false
+  evidence: No AsyncAPI document and no public webhook or event catalog.
+- id: green-button-espi
+  conforms: false
+  evidence: No Green Button Download My Data or Connect My Data surface anywhere; EnergyHub is
+    a DERMS vendor, not an obligated utility or retailer. See review.yml mandate block.
+- id: ieee-2030-5
+  conforms: false
+  evidence: Named only in third-party analyst writeups, never on an EnergyHub property.
+- id: cta-2045
+  conforms: false
+- id: ocpp
+  conforms: false
+  evidence: EV chargers are integrated via partner cloud APIs; no OCPP/OCPI reference published.
+- id: ocpi
+  conforms: false
+- id: iec-cim-61968
+  conforms: false
+- id: multispeak
+  conforms: false
+- id: dnp3
+  conforms: false
+compliance_program:
+  published: false
+  certifications: []
+  evidence: |
+    energyhub.com/security, /trust, /compliance and /legal all return 404. The terms and
+    privacy pages were fetched in full and grepped for SOC 2, ISO 27001, NIST, PCI, HIPAA,
+    FedRAMP, penetration testing, and bug bounty - the only hits are GDPR and CCPA rights
+    sections in the privacy policy, which describe data-subject rights, not a certification.

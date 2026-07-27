@@ -96,6 +96,25 @@ apis:
   - type: PartnerProgram
     url: https://www.energyhub.com/der-partner-ecosystem/become-a-partner
 common:
+- type: DomainSecurity
+  url: security/energyhub-domain-security.yml
+- type: Authentication
+  name: EnergyHub authentication profile (mutual TLS, probed)
+  url: authentication/energyhub-authentication.yml
+- type: Conformance
+  name: EnergyHub standards conformance
+  url: conformance/energyhub-conformance.yml
+- type: Lifecycle
+  name: EnergyHub API lifecycle posture
+  url: lifecycle/energyhub-lifecycle.yml
+- type: Packages
+  name: EnergyHub package registry sweep
+  url: packages/energyhub-packages.yml
+- type: LLMsTxt
+  url: llms/energyhub-llms.txt
+- type: Integrations
+  name: EnergyHub DER partner integrations catalog
+  url: integrations/_index.yml
 - type: Website
   url: https://www.energyhub.com/
 - type: Documentation
@@ -116,8 +135,17 @@ common:
   url: https://www.energyhub.com/careers
 - type: Support
   url: https://www.energyhub.com/contact
+- type: TermsOfService
+  url: https://www.energyhub.com/terms
 - type: PrivacyPolicy
   url: https://www.energyhub.com/privacy-policy
+- type: UserGuide
+  name: ChargingRewards app user guide (the only public documentation section)
+  url: https://help.energyhub.com/articles/chargingrewards/overview
+- type: Patents
+  url: https://www.energyhub.com/patents
+- type: Resources
+  url: https://www.energyhub.com/resources
 - type: GitHubOrganization
   url: https://github.com/energyhub
 - type: LinkedIn

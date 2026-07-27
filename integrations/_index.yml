@@ -1,0 +1,66 @@
+generated: '2026-07-27'
+method: searched
+source: https://www.energyhub.com/der-partner-ecosystem
+status: listing-only
+note: |
+  EnergyHub publishes a named DER partner ecosystem - the manufacturers whose device clouds
+  connect to the Edge (formerly Mercury) DERMS through the Mercury Edge Connect integration
+  framework. This index captures that published list verbatim as the real integration surface.
+  Every entry is listing-only: `arazzo: null`, `status: pending-partner-spec`. EnergyHub itself
+  publishes no OpenAPI, so there is no provider-side operation to bind, and no workflow can be
+  authored without inventing operations. Where a partner already exists as a company repo in the
+  api-evangelist network, the slug is recorded in `network` so a future round can pick these up
+  the moment an EnergyHub spec becomes available.
+  Two further named integration surfaces are recorded separately and are NOT device partners:
+  the utility-side REST gateway layer (Siemens, GE Vernova) on the utility-integrations page,
+  and the Marketplace API launch integrators EFI, Enervee, and Uplight named in the 2021-05-13
+  announcement.
+integrations:
+- {slug: alarm-com, label: Alarm.com, category: smart-home, arazzo: null, status: pending-partner-spec, note: 'EnergyHub is an independent subsidiary of Alarm.com (Nasdaq: ALRM)'}
+- {slug: amazon-thermostat, label: Amazon Thermostat, category: thermostat, arazzo: null, status: pending-partner-spec, network: amazon}
+- {slug: building36, label: Building36, category: smart-home, arazzo: null, status: pending-partner-spec, note: an Alarm.com company}
+- {slug: canadian-solar, label: Canadian Solar, category: solar, arazzo: null, status: pending-partner-spec}
+- {slug: chargepoint, label: ChargePoint, category: ev-charging, arazzo: null, status: pending-partner-spec, network: chargepoint}
+- {slug: copeland, label: Copeland, category: hvac, arazzo: null, status: pending-partner-spec}
+- {slug: ecobee, label: Ecobee, category: thermostat, arazzo: null, status: pending-partner-spec, network: ecobee}
+- {slug: eguana-technologies, label: Eguana Technologies, category: storage, arazzo: null, status: pending-partner-spec}
+- {slug: emporia, label: Emporia, category: energy-management, arazzo: null, status: pending-partner-spec}
+- {slug: enphase, label: Enphase, category: solar-storage, arazzo: null, status: pending-partner-spec, network: enphase}
+- {slug: flo, label: FLO, category: ev-charging, arazzo: null, status: pending-partner-spec, network: flo}
+- {slug: fortress-power, label: Fortress Power, category: storage, arazzo: null, status: pending-partner-spec}
+- {slug: franklinwh, label: FranklinWH, category: energy-management, arazzo: null, status: pending-partner-spec}
+- {slug: ge-vernova, label: GE Vernova, category: grid-software, arazzo: null, status: pending-partner-spec, network: ge-vernova}
+- {slug: generac-grid-services, label: Generac Grid Services, category: storage, arazzo: null, status: pending-partner-spec, network: generac-holdings}
+- {slug: general-motors, label: General Motors, category: electric-vehicle, arazzo: null, status: pending-partner-spec, network: general-motors, note: Chevrolet, GMC, Cadillac EVs and GM home energy storage}
+- {slug: johnson-controls-lux, label: Johnson Controls / Lux Products, category: thermostat, arazzo: null, status: pending-partner-spec, network: johnson-controls}
+- {slug: qcells, label: Qcells, category: solar, arazzo: null, status: pending-partner-spec}
+- {slug: renew-home, label: Renew Home, category: energy-management, arazzo: null, status: pending-partner-spec}
+- {slug: resideo, label: Resideo, category: thermostat, arazzo: null, status: pending-partner-spec, network: resideo-technologies}
+- {slug: rheem, label: Rheem, category: water-heating, arazzo: null, status: pending-partner-spec}
+- {slug: rivian, label: Rivian, category: electric-vehicle, arazzo: null, status: pending-partner-spec, network: rivian-automotive}
+- {slug: siemens, label: Siemens AG, category: grid-software, arazzo: null, status: pending-partner-spec, network: siemens}
+- {slug: sma, label: SMA, category: solar-storage, arazzo: null, status: pending-partner-spec}
+- {slug: sol-ark, label: Sol-Ark, category: solar-storage, arazzo: null, status: pending-partner-spec}
+- {slug: solaredge, label: SolarEdge, category: solar, arazzo: null, status: pending-partner-spec, network: solaredge}
+- {slug: sonnen, label: Sonnen, category: storage, arazzo: null, status: pending-partner-spec}
+- {slug: sunnova, label: Sunnova, category: solar-storage, arazzo: null, status: pending-partner-spec}
+- {slug: sunrun, label: Sunrun, category: solar-storage, arazzo: null, status: pending-partner-spec, network: sunrun}
+- {slug: tesla, label: Tesla, category: electric-vehicle, arazzo: null, status: pending-partner-spec, network: tesla, note: 'Tesla charger and battery owners can enroll in EnergyHub VPPs from the Tesla app'}
+- {slug: toyota, label: Toyota, category: electric-vehicle, arazzo: null, status: pending-partner-spec, network: toyota}
+- {slug: wallbox, label: Wallbox, category: ev-charging, arazzo: null, status: pending-partner-spec}
+marketplace_integrators:
+- {label: EFI, source: 'https://www.energyhub.com/news/marketplace-api-announcement', note: named launch integrator of the Marketplace API, 2021-05-13}
+- {label: Enervee, source: 'https://www.energyhub.com/news/marketplace-api-announcement', note: named launch integrator of the Marketplace API, 2021-05-13}
+- {label: Uplight, source: 'https://www.energyhub.com/news/marketplace-api-announcement', note: named launch integrator of the Marketplace API, 2021-05-13}
+utility_side_integrations:
+  source: https://www.energyhub.com/edge-derms-platform/utility-integrations
+  claim: 'EnergyHub creates a gateway layer that simplifies complexity into REST APIs. This
+    integration layer is separated from the core platform and then synchronizes between
+    EnergyHub REST APIs and utility systems.'
+  featured_partners: [Siemens AG, GE Vernova]
+  documented: false
+coverage:
+  device_partners_listed: 32
+  with_arazzo: 0
+  matched_to_network: 16
+  reason_no_arazzo: EnergyHub publishes no OpenAPI, so no provider-side operationId exists to bind.

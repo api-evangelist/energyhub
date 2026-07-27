@@ -1,0 +1,57 @@
+generated: '2026-07-27'
+method: searched
+source: EnergyHub public site and announcements; live host probes
+summary: |
+  EnergyHub publishes no API lifecycle contract of any kind - no version scheme, no deprecation
+  or sunset policy, no SLA, no status page, and no changelog. This is consistent with a fully
+  partner-gated API: version and deprecation terms are handled inside the commercial DER partner
+  agreement rather than in public. Everything recorded below is an evidenced absence or a
+  publicly datable platform event; nothing is inferred about the APIs themselves beyond what
+  EnergyHub has said in writing.
+versioning:
+  scheme: not published
+  current: unknown
+  docs: null
+  evidence: No version identifier appears in either API announcement, on any public page, or in
+    the one probeable host (mec.energyhub.com rejects all anonymous requests at the TLS layer).
+deprecation:
+  policy_url: null
+  sunset_header: unknown
+  evidence: No deprecation policy, sunset schedule, or RFC 8594 header behaviour can be observed
+    or is documented publicly.
+sla:
+  url: null
+  uptime_target: null
+  evidence: No public SLA. Uptime commitments would sit inside utility and DER partner contracts.
+status_page:
+  url: null
+  evidence: status.energyhub.com does not resolve (no DNS record) and www.energyhub.com/status
+    returns 404. No third-party status page (Statuspage.io, Instatus, Better Stack) was found.
+changelog:
+  url: null
+  evidence: No dated changelog or release-notes page. The closest public surface is the
+    news-and-announcements feed (https://www.energyhub.com/news-announcements), which carries
+    company and partnership news rather than API releases, and has no RSS/Atom feed
+    (/feed returns 404).
+deprecated_operations: []
+platform_lineage:
+- date: '2021-02-18'
+  event: Mercury Edge Connect released as the standardized DER-provider integration framework
+    for what the announcement calls "EnergyHub's Mercury DERMS".
+  source: https://www.energyhub.com/news/mercury-edge-connect-announcement
+- date: '2021-05-13'
+  event: Marketplace API announced for point-of-sale demand-response pre-enrollment, with EFI,
+    Enervee, and Uplight named as launch integrators.
+  source: https://www.energyhub.com/news/marketplace-api-announcement
+- date: observed 2026-07-27
+  event: The platform is marketed as the "Edge DERMS platform"; the Mercury name no longer
+    appears anywhere on energyhub.com. The rename from Mercury DERMS to Edge DERMS is an
+    inference from that comparison - EnergyHub has published no rebrand notice, and no
+    statement was found about what the rename means for the Mercury Edge Connect API name,
+    endpoints, or compatibility.
+  source: https://www.energyhub.com/edge-derms-platform/platform-overview
+api_announcement_cadence: |
+  Both public API announcements date to 2021. No new API, API version, or API capability has
+  been announced in the 21 news items currently listed on the announcements page (reviewed
+  2026-07-27), which cover partnerships, acquisitions (Resideo Grid Services, BTR), program
+  results, and research. The public API surface has been static for five years.

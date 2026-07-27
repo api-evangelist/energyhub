@@ -82,6 +82,29 @@ The Marketplace API integrates the Mercury/Edge DERMS platform with utility mark
 | Auth model | Mutual TLS (X.509 client certificate) at the runtime endpoint; Okta SSO with MFA for the documentation knowledge base. No public API keys, no public OAuth, no `.well-known/openid-configuration`. |
 | Specs harvested | 0 — no OpenAPI, AsyncAPI, JSON Schema, or Postman collection exists on any EnergyHub property or in its GitHub organization. |
 
+## Artifacts
+
+Enrichment round 2026-07-27. Every artifact below is a probe result, a verbatim vendor
+statement, or a faithful generation from this repository — nothing was invented. Where the
+honest answer is "nothing exists", that is recorded rather than filled in.
+
+| Artifact | What it says |
+| --- | --- |
+| [authentication/energyhub-authentication.yml](authentication/energyhub-authentication.yml) | Mutual TLS confirmed by probe — `mec.energyhub.com` returns nginx `400 No required SSL certificate was sent` on every path. Okta SSO gates the docs portal. No API keys, no OAuth. |
+| [conformance/energyhub-conformance.yml](conformance/energyhub-conformance.yml) | OpenADR is a vendor claim, not a certification. Eighteen standards assessed; TLS 1.3 and mutual TLS confirmed, no compliance program published. |
+| [lifecycle/energyhub-lifecycle.yml](lifecycle/energyhub-lifecycle.yml) | No versioning scheme, deprecation policy, SLA, status page, or changelog. Platform lineage Mercury DERMS → Edge DERMS; the public API surface has been static since 2021. |
+| [packages/energyhub-packages.yml](packages/energyhub-packages.yml) | Seven registries searched, zero first-party SDKs. Three near-miss third-party packages recorded so a later round need not re-search them. |
+| [well-known/energyhub-well-known.yml](well-known/energyhub-well-known.yml) | Six discovery documents probed across four hosts: zero found. `help.energyhub.com` returns HTTP 200 soft-404 login HTML for all of them. |
+| [security/energyhub-domain-security.yml](security/energyhub-domain-security.yml) | TLS 1.3 on both hosts, SPF and DMARC `p=reject`, no DNSSEC, no CAA, no HSTS on the website host. |
+| [integrations/_index.yml](integrations/_index.yml) | The published DER partner ecosystem — 32 named device manufacturers, 16 of them already company repos in this network. Listing-only: no EnergyHub OpenAPI exists to bind Arazzo workflows to. |
+| [llms/energyhub-llms.txt](llms/energyhub-llms.txt) | Generated agent-facing summary. EnergyHub publishes no `llms.txt`; the one on its ClickHelp portal is an unreplaced "My Product" vendor template. |
+
+Not produced, and why: no `openapi/`, `asyncapi/`, `skills/`, `mcp/`, `overlays/`, `errors/`,
+`data-model/`, `scopes/`, `sandbox/`, `cli/`, or `conventions/` — all of these require a
+machine-readable contract or documented request semantics, and EnergyHub publishes neither.
+No vulnerability-disclosure or trust-center artifact: probes found no security.txt, no bug
+bounty, and no trust page.
+
 ## Common Properties
 
 - [Website](https://www.energyhub.com/)

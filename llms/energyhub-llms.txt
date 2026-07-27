@@ -1,0 +1,90 @@
+# EnergyHub
+
+> EnergyHub is a Brooklyn, New York distributed energy resource management system (DERMS)
+> vendor and an independent subsidiary of Alarm.com (Nasdaq: ALRM). Its Edge DERMS platform
+> (formerly marketed as Mercury DERMS) lets electric utilities enroll, forecast, dispatch, and
+> measure customer-owned distributed energy resources - smart thermostats, batteries, electric
+> vehicles and EV chargers, solar inverters, and commercial and industrial loads - as virtual
+> power plants. EnergyHub has two publicly announced APIs and neither is publicly documented:
+> access is partner-only, the runtime is behind mutual TLS, and the technical documentation is
+> behind Okta SSO.
+
+## Important for agents
+
+- There is no public API documentation, no OpenAPI or other machine-readable contract, no
+  developer portal, no sandbox, no API key, and no self-serve signup. Do not attempt to call
+  an EnergyHub API without a partner-issued client certificate.
+- The live runtime host `https://mec.energyhub.com` answers every anonymous request with
+  `HTTP 400 "No required SSL certificate was sent"` (nginx mutual-TLS enforcement). This is
+  not an outage and not a rate limit - it means no client certificate was presented.
+- Access requires a commercial DER partner or utility agreement, initiated through the
+  "become a partner" contact form. There is no technical self-service path.
+- EnergyHub is not a utility, retailer, or market operator, so no consumer energy data mandate
+  (Green Button / ESPI, Consumer Data Right, Ontario O. Reg. 633/21) applies to it. It publishes
+  no consumer usage or billing data API and no open market or grid data.
+
+## APIs
+
+- [Mercury Edge Connect API](https://www.energyhub.com/news/mercury-edge-connect-announcement):
+  The standardized DER-provider integration framework connecting thermostat, battery, EV, EV
+  charger, and solar inverter manufacturer clouds to the Edge DERMS platform. EnergyHub states
+  the API "is based on the Open ADR standard, with enhanced functionality around automated
+  enrollment, monitoring, and other functionality". Runtime host `https://mec.energyhub.com`,
+  mutual-TLS gated. No public reference, schema, or operation list.
+- [Marketplace API](https://www.energyhub.com/news/marketplace-api-announcement): Integrates
+  the DERMS platform with utility marketplaces and online retailers so a consumer buying a DER
+  device can be pre-enrolled in a utility demand-response program at the point of sale. Launch
+  integrators EFI, Enervee, and Uplight. No public base URI, schema, or authentication detail.
+
+## Docs
+
+- [Knowledge base home](https://help.energyhub.com/home/en-us/): ClickHelp portal. The
+  ChargingRewards end-user guide is public; every technical guide and MEC integration article
+  is behind an Okta SSO login wall.
+- [ChargingRewards user guide](https://help.energyhub.com/articles/chargingrewards/overview):
+  The one genuinely public documentation section - eight articles for the consumer EV managed
+  charging app. Markdown is available by appending `.md` to any article URL.
+- [Utility integrations](https://www.energyhub.com/edge-derms-platform/utility-integrations):
+  The only public statement that EnergyHub exposes REST APIs, describing a gateway layer that
+  synchronizes between EnergyHub REST APIs and utility systems.
+- [Platform overview](https://www.energyhub.com/edge-derms-platform/platform-overview)
+- [DER partner ecosystem](https://www.energyhub.com/der-partner-ecosystem): 32 named device
+  manufacturer partners.
+- [Become a partner](https://www.energyhub.com/der-partner-ecosystem/become-a-partner)
+
+## API Evangelist artifacts
+
+- [apis.yml](https://raw.githubusercontent.com/api-evangelist/energyhub/refs/heads/main/apis.yml)
+- [Authentication profile](https://raw.githubusercontent.com/api-evangelist/energyhub/refs/heads/main/authentication/energyhub-authentication.yml):
+  mutual TLS confirmed by probe; Okta SSO on the docs portal.
+- [Conformance](https://raw.githubusercontent.com/api-evangelist/energyhub/refs/heads/main/conformance/energyhub-conformance.yml):
+  OpenADR claimed but not certified; twelve other standards checked and not found.
+- [Lifecycle](https://raw.githubusercontent.com/api-evangelist/energyhub/refs/heads/main/lifecycle/energyhub-lifecycle.yml):
+  no versioning, deprecation policy, SLA, status page, or changelog published.
+- [Packages](https://raw.githubusercontent.com/api-evangelist/energyhub/refs/heads/main/packages/energyhub-packages.yml):
+  no first-party SDK in any registry.
+- [Well-known](https://raw.githubusercontent.com/api-evangelist/energyhub/refs/heads/main/well-known/energyhub-well-known.yml):
+  zero discovery documents across four hosts.
+- [Domain security](https://raw.githubusercontent.com/api-evangelist/energyhub/refs/heads/main/security/energyhub-domain-security.yml):
+  TLS 1.3, SPF and DMARC p=reject, no DNSSEC, no CAA, no HSTS on the website host.
+- [DER partner integrations index](https://raw.githubusercontent.com/api-evangelist/energyhub/refs/heads/main/integrations/_index.yml)
+- [Review](https://raw.githubusercontent.com/api-evangelist/energyhub/refs/heads/main/review.yml)
+
+## Company
+
+- [Website](https://www.energyhub.com/)
+- [About](https://www.energyhub.com/company)
+- [News and announcements](https://www.energyhub.com/news-announcements)
+- [Patents](https://www.energyhub.com/patents)
+- [Terms of Service](https://www.energyhub.com/terms)
+- [Privacy Policy](https://www.energyhub.com/privacy-policy)
+- [GitHub organization](https://github.com/energyhub): six public repositories, five archived,
+  all internal engineering tooling. No API client, SDK, or specification.
+
+## Notes on this file
+
+Generated by the API Evangelist enrichment pipeline from apis.yml and the repository artifacts,
+because EnergyHub publishes no llms.txt of its own. The ClickHelp docs portal serves an
+unreplaced vendor template at https://help.energyhub.com/llms.txt - it describes "My Portal" and
+"My Product" and links to nonexistent `project-id` articles, so it is placeholder content, not an
+EnergyHub document, and was deliberately not saved as one.

@@ -1,0 +1,61 @@
+generated: '2026-07-27'
+method: searched
+source: public package-registry searches (npm, PyPI, RubyGems, crates.io, Maven Central,
+  Packagist) plus the github.com/energyhub organization listing
+summary: |
+  EnergyHub publishes no client library or SDK for either of its two APIs. Both the Mercury
+  Edge Connect API and the Marketplace API are partner-gated and undocumented, so there is
+  nothing for a public SDK to wrap. Every major registry was searched on 2026-07-27 and the
+  github.com/energyhub organization (6 public repositories, 5 of them archived) was reviewed:
+  it contains only internal engineering tooling - a Haskell Java parser, a Maven partial-build
+  plugin, a Selenium framework, and two Go secrets CLIs - and no API client of any kind.
+  No `official: true` package is recorded. The near-miss packages below are listed so a future
+  round does not have to re-search them; each is third-party or unattributable and is marked
+  official: false.
+packages: []
+official_packages: 0
+registries_searched:
+- {registry: npm, query: energyhub, first_party_hits: 0}
+- {registry: pypi, queries: [energyhub, energy-hub, pyenergyhub], first_party_hits: 0, note: all 404}
+- {registry: rubygems, query: energyhub, first_party_hits: 0}
+- {registry: crates.io, query: energyhub, first_party_hits: 0}
+- {registry: maven-central, query: energyhub, first_party_hits: 0}
+- {registry: packagist, query: energyhub, first_party_hits: 0}
+- {registry: pkg.go.dev, query: energyhub, first_party_hits: 0}
+near_misses:
+- language: java
+  registry: maven-central
+  name: net.energyhub:dynamo-session-manager
+  url: https://repo1.maven.org/maven2/net/energyhub/dynamo-session-manager/
+  latest: '1.8'
+  published: '2013'
+  official: false
+  note: Group id net.energyhub suggests EnergyHub authorship, but the POM's scm block points
+    at github.com/werkshy/dynamo-session-manager (a personal account, not the energyhub org)
+    and the artifact is a Tomcat session manager backed by DynamoDB - infrastructure tooling,
+    not an API client. Attribution unverified; deliberately not marked official.
+- language: javascript
+  registry: npm
+  name: energyhub-events
+  url: https://www.npmjs.com/package/energyhub-events
+  official: false
+  note: Third-party. Repository github.com/maxenglander/energyhub-events; the README describes
+    it as "an attempted solution for the EnergyHub Coding Sample" - a job-application exercise,
+    not a client library.
+- language: php
+  registry: packagist
+  name: energyhub/client
+  official: false
+  note: Third-party (github.com/vojtys/energyhub-client), unrelated to this EnergyHub; the
+    Packagist package API returns 404 for it, so it is not resolvable.
+github_organization:
+  url: https://github.com/energyhub
+  public_repos: 6
+  api_artifacts: 0
+  repositories:
+  - {name: language-java, language: Haskell, archived: true, description: Java parser and printer for Haskell}
+  - {name: partial-build-plugin, language: Java, archived: true, description: Maven plugin for partially building multi-module projects}
+  - {name: conductor, language: Java, archived: true, description: Selenium framework}
+  - {name: chamber, language: Go, archived: true, description: CLI for managing secrets}
+  - {name: secretly, language: Go, archived: true, description: Secrets with AWS Parameter Store}
+  - {name: .github, language: Shell, archived: false, description: Community health files}
