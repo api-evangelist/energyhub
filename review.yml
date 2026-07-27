@@ -1,0 +1,321 @@
+aid: energyhub
+name: EnergyHub
+review:
+  question: Does EnergyHub publish a public, documented API surface — and does any
+    consumer energy data mandate apply to it?
+  answer: false
+  date: '2026-07-27'
+  reviewer: API Evangelist
+  homeMarket: United States
+  headquarters: Brooklyn, New York, United States (confirmed via GitHub organization
+    location field and the "BROOKLYN, N.Y." dateline on company press releases)
+  ownership: Independent subsidiary of Alarm.com (Nasdaq ALRM) — stated verbatim on
+    https://www.energyhub.com/company
+  tier: grid-tech-derms
+mandate:
+  regime: none
+  status: not-applicable
+  reasoning: |
+    EnergyHub is a DERMS software vendor selling to utilities. It is not a licensed
+    utility, not an energy retailer, not a distribution network operator, and not a
+    market operator, so none of the energy consumer-data obligations in scope for this
+    sector attach to it as an obligated entity.
+
+    Specifically checked and NOT found for EnergyHub:
+      - Green Button / ESPI (NAESB REQ.21 / NAESB ESPI): no Green Button Download My
+        Data or Connect My Data reference anywhere on energyhub.com, help.energyhub.com,
+        or in the two API announcements. EnergyHub is not a Green Button Alliance
+        listed implementer found in this pass. US Green Button is voluntary for the
+        utilities that DO adopt it; EnergyHub is simply outside its scope.
+      - Ontario Green Button regulation (O. Reg. 633/21): applies to Ontario licensed
+        distributors and retailers. EnergyHub delivers programs in Ontario with the
+        IESO (referenced on its homepage as "Building Canada's largest residential
+        virtual power plant"), but it is a vendor to that program, not a regulated
+        distributor, and no Green Button surface of its own was found.
+      - Australian Consumer Data Right (energy): not applicable — no Australian
+        operations or CDR data-holder designation found.
+      - UK smart-meter infrastructure (DCC): not applicable.
+
+    This is a deliberate, evidenced "not-applicable", NOT an unverified claim. No
+    press release, compliance page, or regulator listing asserting an implementation
+    was found, because none was claimed.
+dataStandard:
+  primary: OpenADR
+  evidence: |
+    EnergyHub's own 2021-02-18 press release for Mercury Edge Connect states verbatim:
+    "At the heart of Mercury Edge Connect is a new API designed specifically to meet
+    the requirements of managing behind-the-meter DERs at scale. The API is based on
+    the Open ADR standard, with enhanced functionality around automated enrollment,
+    monitoring, and other functionality required for managing enterprise-wide portfolios
+    of grid-edge and customer-owned DERs."
+    Source: https://www.energyhub.com/news/mercury-edge-connect-announcement (HTTP 200,
+    fetched 2026-07-27).
+  version: not stated — the announcement names "Open ADR" with no version. OpenADR
+    2.0b is the profile in general DERMS use, but EnergyHub does not say so and this
+    was NOT verified.
+  certification: No EnergyHub entry was found in an OpenADR Alliance certified-product
+    listing during this pass. Treat "OpenADR-based" as a vendor statement, not a
+    certification.
+  otherStandardsChecked:
+    - name: IEEE 2030.5 (SEP 2.0)
+      found: false
+      note: Named only in third-party analyst/marketing writeups about DERMS platforms,
+        never on an EnergyHub property. Not recorded as an EnergyHub standard.
+    - name: DNP3
+      found: false
+      note: Same — third-party sources only.
+    - name: CTA-2045
+      found: false
+    - name: OCPP / OCPI
+      found: false
+      note: EnergyHub integrates EV chargers via partner cloud APIs; no OCPP/OCPI
+        reference published.
+    - name: Green Button / ESPI
+      found: false
+    - name: IEC CIM 61968 / 61970
+      found: false
+    - name: MultiSpeak
+      found: false
+consumerVsMarketData:
+  consumer_data_api: false
+  consumer_data_notes: |
+    There is no documented API by which a third party — or a consumer — can obtain an
+    individual utility customer's usage or billing data from EnergyHub. EnergyHub
+    handles customer device telemetry as a processor on behalf of contracting utilities;
+    the data flows utility <-> EnergyHub <-> DER manufacturer cloud under B2B contract.
+    No consent-based data-sharing surface, no accreditation scheme, no customer-facing
+    data export API was found. The consumer-facing artifact found is the ChargingRewards
+    mobile app (documented only inside the gated knowledge base), not an API.
+  market_data_open: false
+  market_data_notes: |
+    EnergyHub publishes no open grid, market, system, or program data. There is no
+    data portal, no public dataset, no statistics API, no CSV/JSON download, and no
+    open-data licence page. Its aggregate program figures appear only as prose in press
+    releases (e.g. "over 50 utilities nationwide" and "more than 2,000 MW of flexible
+    capacity" in the 2021-05-13 Marketplace API release). Both axes are closed —
+    unusually, this organization has neither the open market-data side that ISOs/RTOs
+    and EIA have, nor the mandated consumer-data side that retailers under CDR or
+    Ontario Green Button have.
+accessGate:
+  gate: partner-only
+  whatADeveloperMustDo: |
+    1. There is no self-serve developer signup anywhere on energyhub.com. No "sign up",
+       "get API key", "create account", or sandbox link exists on any public page probed.
+    2. A DER manufacturer or service provider submits the contact form at
+       https://www.energyhub.com/der-partner-ecosystem/become-a-partner (HTTP 200), which
+       is a "Connect with us" lead form — not an application with published technical
+       criteria.
+    3. Integration then proceeds under a commercial DER partner agreement with
+       EnergyHub's partner-management team. Utility buyers go through a sales/demo
+       motion ("REQUEST A DEMO" is the homepage CTA).
+    4. Technical documentation lives at help.energyhub.com behind Okta SSO. The portal
+       home page renders anonymously (HTTP 200) and exposes the section names, but every
+       article body returns a login wall reading "Please log in to access the requested
+       resource ... Log in with Okta SSO", including the two sections that matter:
+       /articles/mec/mec-overview (device-partner MEC integration docs) and
+       /articles/technical-guides/technical-guides-overview.
+    5. Runtime access to mec.energyhub.com requires an X.509 client certificate issued
+       by EnergyHub; without one nginx terminates the request at HTTP 400.
+  isCustomerLoginOnly: true
+  selfServePortal: false
+authModel:
+  runtime:
+    - scheme: Mutual TLS (client certificate)
+      evidence: 'https://mec.energyhub.com — HTTP 400, body: "400 No required SSL
+        certificate was sent" (nginx), returned identically for every path probed on
+        2026-07-27. Server certificate CN=mec.energyhub.com, issuer "RapidSSL TLS RSA
+        CA G1" (DigiCert), valid 2026-03-17 to 2026-10-01, resolved to 54.146.109.60.
+        This is a live, production, mTLS-gated endpoint, not a documentation site.'
+      documented: false
+  documentation:
+    - scheme: Okta SSO (SAML/OIDC via Okta) for the help.energyhub.com knowledge base
+      evidence: Login interstitial served on every /articles/* path with an "Log in
+        with Okta SSO" button and an authenticator-code (MFA) field.
+      documented: false
+  wellKnown:
+    - url: https://www.energyhub.com/.well-known/security.txt
+      status: 404
+    - url: https://api.energyhub.com/.well-known/openid-configuration
+      status: 404
+    - url: https://mec.energyhub.com/.well-known/openid-configuration
+      status: 400
+      note: mTLS rejection, not a 404 — nothing could be read anonymously.
+  noPublicApiKeys: true
+  noPublicOAuth: true
+probes:
+  date: '2026-07-27'
+  method: curl -sS -L (anonymous, no credentials), plus openssl s_client for TLS
+  results:
+    - url: https://energyhub.com/
+      status: 200
+      note: 301/302 to https://www.energyhub.com/
+    - url: https://www.energyhub.com/
+      status: 200
+    - url: https://developer.energyhub.com/
+      status: 0
+      note: DNS does not resolve
+    - url: https://developers.energyhub.com/
+      status: 0
+      note: DNS does not resolve
+    - url: https://docs.energyhub.com/
+      status: 0
+      note: DNS does not resolve
+    - url: https://data.energyhub.com/
+      status: 0
+      note: DNS does not resolve
+    - url: https://api.energyhub.com/
+      status: 404
+      note: Host resolves and serves TLS but every path 404s — /health, /v1, /api,
+        /docs, /openapi.json, /.well-known/openid-configuration all 404. No API found.
+    - url: https://mec.energyhub.com/
+      status: 400
+      note: Live nginx requiring a client certificate — see authModel above. The single
+        most substantive technical finding of this review.
+    - url: https://connect.energyhub.com/
+      status: 0
+      note: DNS does not resolve
+    - url: https://portal.energyhub.com/
+      status: 0
+      note: DNS does not resolve
+    - url: https://app.energyhub.com/
+      status: 0
+      note: DNS does not resolve
+    - url: https://sandbox.energyhub.com/
+      status: 0
+      note: DNS does not resolve
+    - url: https://status.energyhub.com/
+      status: 0
+      note: DNS does not resolve
+    - url: https://help.energyhub.com/home/en-us/
+      status: 200
+      note: Knowledge base landing page renders anonymously; section links visible.
+    - url: https://help.energyhub.com/articles/mec/mec-overview
+      status: 200
+      note: HTTP 200 but the body is an Okta SSO login wall. Device-partner (MEC)
+        integration documentation is NOT public.
+    - url: https://help.energyhub.com/articles/technical-guides/technical-guides-overview
+      status: 200
+      note: HTTP 200 but the body is an Okta SSO login wall.
+    - url: https://www.energyhub.com/developers
+      status: 404
+    - url: https://www.energyhub.com/api
+      status: 404
+    - url: https://www.energyhub.com/docs
+      status: 404
+    - url: https://www.energyhub.com/openapi.json
+      status: 404
+    - url: https://www.energyhub.com/swagger.json
+      status: 404
+    - url: https://www.energyhub.com/robots.txt
+      status: 404
+    - url: https://www.energyhub.com/sitemap.xml
+      status: 404
+    - url: https://www.energyhub.com/.well-known/security.txt
+      status: 404
+    - url: https://www.energyhub.com/der-partner-ecosystem
+      status: 200
+    - url: https://www.energyhub.com/der-partner-ecosystem/become-a-partner
+      status: 200
+      note: Lead/contact form only. No technical requirements, no API mention.
+    - url: https://www.energyhub.com/edge-derms-platform/utility-integrations
+      status: 200
+      note: 'Says EnergyHub "creates a gateway layer that simplifies complexity into
+        REST APIs. This integration layer is separated from the core platform and then
+        synchronizes between EnergyHub REST APIs and utility systems." Named partners
+        Siemens AG and GE Vernova. No base URL, no docs, no standard named — recorded
+        as a capability claim, deliberately NOT listed as an API in apis.yml.'
+    - url: https://www.energyhub.com/edge-derms-platform/platform-overview
+      status: 200
+    - url: https://www.energyhub.com/news/mercury-edge-connect-announcement
+      status: 200
+    - url: https://www.energyhub.com/news/marketplace-api-announcement
+      status: 200
+    - url: https://www.energyhub.com/news-announcements
+      status: 200
+    - url: https://www.energyhub.com/feed
+      status: 404
+      note: No RSS/Atom feed found; blog pulls would need HTML scraping.
+    - url: https://api.github.com/orgs/energyhub
+      status: 200
+      note: 'Verified org, Brooklyn NY, 6 public repos — all internal engineering tools
+        (chamber, secretly, conductor, partial-build-plugin, language-java, .github)
+        and 5 of 6 archived. No API client, no SDK, no OpenAPI, no spec of any kind.'
+apisFound:
+  - name: Mercury Edge Connect API
+    real: true
+    publiclyDocumented: false
+    evidence: Vendor press release 2021-02-18, verbatim "The API is based on the Open
+      ADR standard"; gated docs section /articles/mec/* in the knowledge base; live
+      mTLS host mec.energyhub.com.
+  - name: Marketplace API
+    real: true
+    publiclyDocumented: false
+    evidence: Vendor press release 2021-05-13; named integrators EFI, Enervee, Uplight.
+      Called "open" in marketing, but no artifact, endpoint, or doc is public.
+specsHarvested:
+  count: 0
+  openapi: false
+  asyncapi: false
+  postman: false
+  note: No OpenAPI, Swagger, AsyncAPI, JSON Schema, Postman collection, or any other
+    machine-readable contract was found on any EnergyHub property, in its GitHub
+    organization, or via any public index. The openapi/ directory is intentionally
+    absent — nothing real existed to save, and nothing was fabricated.
+findings:
+  summary: |
+    EnergyHub is a textbook example of the private DERMS layer that sits between
+    utilities and customer-owned devices with a completely closed API posture. Two
+    genuine APIs exist and are publicly acknowledged by the company — Mercury Edge
+    Connect (OpenADR-based, for DER manufacturer clouds) and the Marketplace API (for
+    point-of-sale demand-response pre-enrollment) — but neither has a single line of
+    public reference documentation, a published base URI, a schema, or a signup path.
+    Everything technical is behind Okta SSO in the knowledge base, and the runtime
+    endpoint is behind mutual TLS.
+
+    The mandate question is clean and negative: no energy consumer-data obligation
+    attaches to EnergyHub at all. It is not a utility, retailer, DNO, or market
+    operator. There is no Green Button implementation, no CDR designation, and no
+    Ontario regulation exposure — and, importantly, no claim of any, so there is no
+    gap between claim and implementation to police here. The interesting split is a
+    different one: EnergyHub is closed on BOTH axes. It has no open market data (unlike
+    the ISOs/RTOs and EIA in the same market) and no consumer data API (unlike the
+    retailers under a real mandate). The only standard it touches is OpenADR, and it
+    touches it as a vendor statement rather than a certification.
+sources:
+  - url: https://www.energyhub.com/
+    type: Website
+    note: Edge DERMS positioning; "delivering successful load control programs since
+      2009"; DER classes and VPP strategies.
+  - url: https://www.energyhub.com/company
+    type: About
+    note: '"EnergyHub is an independent subsidiary of Alarm.com (Nasdaq: ALRM)."'
+  - url: https://www.energyhub.com/news/mercury-edge-connect-announcement
+    type: Announcement
+    note: The OpenADR statement, verbatim. Also gives 2021 scale ("over 50 utilities",
+      "more than 1,800 MW").
+  - url: https://www.energyhub.com/news/marketplace-api-announcement
+    type: Announcement
+    note: Marketplace API scope, EFI/Enervee/Uplight, "more than 2,000 MW" as of
+      2021-05-13.
+  - url: https://www.energyhub.com/edge-derms-platform/utility-integrations
+    type: Documentation
+    note: The only public statement that EnergyHub exposes REST APIs to utility systems.
+  - url: https://help.energyhub.com/home/en-us/
+    type: Documentation
+    note: Knowledge base index — sections include "Technical guides" and "MEC
+      integrations"; all article bodies Okta-gated.
+  - url: https://github.com/energyhub
+    type: GitHubOrganization
+    note: Verified org, no API artifacts.
+actions:
+  apisYmlCreated: true
+  openapiDirectoryCreated: false
+  specsSaved: 0
+  fabricated: none
+  reason: |
+    Bootstrap captured identity plus an honest, evidenced record of a fully gated API
+    surface. Two real-but-undocumented APIs are listed with their vendor evidence and
+    their gate stated in the description. No endpoint, scope, schema, or host was
+    invented. The only baseURL recorded (https://mec.energyhub.com) is a host that was
+    directly probed and confirmed live; the inference that "mec" stands for Mercury
+    Edge Connect is flagged as an inference in both apis.yml and this file.
