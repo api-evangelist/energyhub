@@ -22,6 +22,17 @@ description: 'EnergyHub is a Brooklyn, New York distributed energy resource mana
   enforcement rather than a public API. No consumer usage or billing data API exists for third parties,
   and no open grid or market data is published, so EnergyHub is closed on both the consumer-data and
   the market-data axis, and a developer gets in only by signing a commercial or DER partner agreement.'
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://ez7jkrb8oox.exactdn.com/app/uploads/2024/10/favicon.png
 tags:
 - Energy
