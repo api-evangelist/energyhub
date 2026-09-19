@@ -88,6 +88,12 @@ apis:
   - OpenADR
   - Demand Response
   - Distributed Energy Resources
+  - Partners
+  tags_raw:
+  - DERMS
+  - OpenADR
+  - Demand Response
+  - Distributed Energy Resources
   - Partner
   properties:
   - type: Announcement
@@ -109,6 +115,12 @@ apis:
     on 2026-07-27; access is via a commercial marketplace partnership.
   humanURL: https://www.energyhub.com/news/marketplace-api-announcement
   tags:
+  - Demand Response
+  - Enrollment
+  - Marketplace
+  - Incentives
+  - Partners
+  tags_raw:
   - Demand Response
   - Enrollment
   - Marketplace
