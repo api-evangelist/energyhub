@@ -1,4 +1,4 @@
-# EnergyHub (energyhub)
+# EnergyHub
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,127 +64,91 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-EnergyHub is a Brooklyn, New York distributed energy resource management system (DERMS) vendor and an independent subsidiary of Alarm.com (Nasdaq ALRM), operating in its home market of the United States. Its Edge DERMS platform (formerly marketed as Mercury DERMS) lets electric utilities enroll, forecast, dispatch, and measure customer-owned distributed energy resources — smart thermostats, batteries, electric vehicles and EV chargers, solar inverters, and commercial and industrial loads — as virtual power plants, and the company says it has been running load control programs since 2009. EnergyHub sits squarely in the private middle layer of the energy value chain: it is not a utility, not a retailer, and not a market operator, so no consumer energy data mandate applies to it — there is no Green Button obligation, no Consumer Data Right designation, and no Ontario regulation in play. Its API posture is honestly partner-only and entirely undocumented in public.
+EnergyHub is a Brooklyn, New York distributed energy resource management system (DERMS) vendor and an independent subsidiary of Alarm.com (Nasdaq ALRM), operating in its home market of the United States. Its Edge DERMS platform (formerly marketed as Mercury DERMS) lets electric utilities enroll, forecast, dispatch, and measure customer-owned distributed energy resources - smart thermostats, batteries, electric vehicles and EV chargers, solar inverters, and commercial and industrial loads - as virtual power plants, and the company says it has been running load control programs since 2009. EnergyHub sits squarely in the private middle layer of the energy value chain. It is not a utility, not a retailer, and not a market operator, so no consumer energy data mandate applies to it: there is no Green Button obligation, no Consumer Data Right designation, and no Ontario regulation in play. Its API posture is honestly partner-only and entirely undocumented in public. Two APIs are publicly announced by the company - the Mercury Edge Connect API, which EnergyHub states is "based on the Open ADR standard", and a Marketplace API for demand-response pre-enrollment at the device point of sale - but neither has public reference documentation, a published base URI, a schema, or a self-serve signup. The knowledge base at help.energyhub.com serves a public landing page while every technical guide and device-partner integration article behind it is gated by an Okta SSO login. A live host at mec.energyhub.com answers TLS with a valid DigiCert certificate and rejects every anonymous request with "400 No required SSL certificate was sent", which is mutual-TLS client-certificate enforcement rather than a public API. No consumer usage or billing data API exists for third parties, and no open grid or market data is published, so EnergyHub is closed on both the consumer-data and the market-data axis, and a developer gets in only by signing a commercial or DER partner agreement.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/energyhub/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/energyhub/refs/heads/main/apis.yml)
+**Areas:** Energy · United States · Utilities · Electricity · Grid · DERMS · Distributed Energy Resources · Demand Response · Virtual Power Plant · OpenADR · EV Charging · Solar
 
-## Tags
+## EnergyHub on APIs.io
 
-- Energy
-- United States
-- Utilities
-- Electricity
-- Grid
-- DERMS
-- Distributed Energy Resources
-- Demand Response
-- Virtual Power Plant
-- OpenADR
-- EV Charging
-- Solar
-- Energy Storage
-- Smart Thermostats
+Everything profiled for EnergyHub is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/energyhub/](https://apis.io/providers/energyhub/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (2)
 
-- **Created:** 2026-07-27
-- **Modified:** 2026-07-27
+- [EnergyHub Mercury Edge Connect API](https://apis.io/apis/energyhub/mercury-edge-connect-api/) — Mercury Edge Connect is EnergyHub's standardized integration framework for connecting DER providers (thermostat, battery, EV, EV charger, and solar inverter…
+- [EnergyHub Marketplace API](https://apis.io/apis/energyhub/marketplace-api/) — The Marketplace API integrates the Mercury/Edge DERMS platform with utility marketplace providers and online retailers so that a consumer buying a DER…
 
-## APIs
+### Published properties
 
-### EnergyHub Mercury Edge Connect API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Mercury Edge Connect is EnergyHub's standardized integration framework for connecting DER providers to the Mercury/Edge DERMS platform. EnergyHub states that the API "is based on the Open ADR standard, with enhanced functionality around automated enrollment, monitoring, and other functionality required for managing enterprise-wide portfolios of grid-edge and customer-owned DERs." No public reference documentation, schema, or operation list is published. The host `mec.energyhub.com` was probed on 2026-07-27 and is live behind a valid DigiCert certificate, returning HTTP 400 "No required SSL certificate was sent" to every anonymous request — mutual TLS client-certificate authentication. Access requires a DER partner agreement.
+#### Security (2)
 
-- **Human URL:** [https://www.energyhub.com/news/mercury-edge-connect-announcement](https://www.energyhub.com/news/mercury-edge-connect-announcement)
-- **Base URL:** `https://mec.energyhub.com`
+Authentication, trust centre, and vulnerability disclosure.
 
-#### Tags
+- [Energyhub Authentication](https://apis.io/security/energyhub/energyhub-authentication/)
+- [Energyhub Domain Security](https://apis.io/security/energyhub/energyhub-domain-security/)
 
-- DERMS
-- OpenADR
-- Demand Response
-- Distributed Energy Resources
-- Partner
+## Where to find this API
 
-#### Properties
-
-- [Announcement](https://www.energyhub.com/news/mercury-edge-connect-announcement)
-- [Documentation](https://help.energyhub.com/articles/mec/mec-overview) — Okta SSO gated
-- [Partner Program](https://www.energyhub.com/der-partner-ecosystem/become-a-partner)
-
-### EnergyHub Marketplace API
-
-The Marketplace API integrates the Mercury/Edge DERMS platform with utility marketplace providers and online retailers so that a consumer buying a DER device can be pre-enrolled in a utility demand-response program at the point of sale. EnergyHub says it "automates the verification of DER program eligibility, incentive processing, and enrollment." Named launch integrators are EFI, Enervee, and Uplight. Despite being called "open" in the announcement, no public documentation, base URI, schema, authentication scheme, or signup was found.
-
-- **Human URL:** [https://www.energyhub.com/news/marketplace-api-announcement](https://www.energyhub.com/news/marketplace-api-announcement)
-
-#### Tags
-
-- Demand Response
-- Enrollment
-- Marketplace
-- Incentives
-- Partner
-
-#### Properties
-
-- [Announcement](https://www.energyhub.com/news/marketplace-api-announcement)
-- [Partner Program](https://www.energyhub.com/der-partner-ecosystem/become-a-partner)
-
-## Mandate and Access Posture
-
-| Dimension | Finding |
-| --- | --- |
-| Home market | United States |
-| Mandate regime | none |
-| Mandate status | not-applicable — EnergyHub is a DERMS vendor, not a utility, retailer, DNO, or market operator, so no Green Button, CDR, or Ontario obligation attaches to it. No compliance claim was made, so there is no claim-versus-implementation gap. |
-| Data standard | OpenADR — vendor-stated basis for the Mercury Edge Connect API, version not stated, no OpenADR Alliance certification found. |
-| Consumer data API | No. There is no documented way for a third party or a consumer to obtain an individual customer's usage or billing data from EnergyHub. |
-| Open market data | No. No grid, market, program, or system datasets are published; no data portal exists. |
-| Access gate | partner-only. No self-serve signup exists. A DER manufacturer submits the "become a partner" contact form, then integrates under a commercial partner agreement. |
-| Auth model | Mutual TLS (X.509 client certificate) at the runtime endpoint; Okta SSO with MFA for the documentation knowledge base. No public API keys, no public OAuth, no `.well-known/openid-configuration`. |
-| Specs harvested | 0 — no OpenAPI, AsyncAPI, JSON Schema, or Postman collection exists on any EnergyHub property or in its GitHub organization. |
-
-## Artifacts
-
-Enrichment round 2026-07-27. Every artifact below is a probe result, a verbatim vendor
-statement, or a faithful generation from this repository — nothing was invented. Where the
-honest answer is "nothing exists", that is recorded rather than filled in.
-
-| Artifact | What it says |
-| --- | --- |
-| [authentication/energyhub-authentication.yml](authentication/energyhub-authentication.yml) | Mutual TLS confirmed by probe — `mec.energyhub.com` returns nginx `400 No required SSL certificate was sent` on every path. Okta SSO gates the docs portal. No API keys, no OAuth. |
-| [conformance/energyhub-conformance.yml](conformance/energyhub-conformance.yml) | OpenADR is a vendor claim, not a certification. Eighteen standards assessed; TLS 1.3 and mutual TLS confirmed, no compliance program published. |
-| [lifecycle/energyhub-lifecycle.yml](lifecycle/energyhub-lifecycle.yml) | No versioning scheme, deprecation policy, SLA, status page, or changelog. Platform lineage Mercury DERMS → Edge DERMS; the public API surface has been static since 2021. |
-| [packages/energyhub-packages.yml](packages/energyhub-packages.yml) | Seven registries searched, zero first-party SDKs. Three near-miss third-party packages recorded so a later round need not re-search them. |
-| [well-known/energyhub-well-known.yml](well-known/energyhub-well-known.yml) | Six discovery documents probed across four hosts: zero found. `help.energyhub.com` returns HTTP 200 soft-404 login HTML for all of them. |
-| [security/energyhub-domain-security.yml](security/energyhub-domain-security.yml) | TLS 1.3 on both hosts, SPF and DMARC `p=reject`, no DNSSEC, no CAA, no HSTS on the website host. |
-| [integrations/_index.yml](integrations/_index.yml) | The published DER partner ecosystem — 32 named device manufacturers, 16 of them already company repos in this network. Listing-only: no EnergyHub OpenAPI exists to bind Arazzo workflows to. |
-| [llms/energyhub-llms.txt](llms/energyhub-llms.txt) | Generated agent-facing summary. EnergyHub publishes no `llms.txt`; the one on its ClickHelp portal is an unreplaced "My Product" vendor template. |
-
-Not produced, and why: no `openapi/`, `asyncapi/`, `skills/`, `mcp/`, `overlays/`, `errors/`,
-`data-model/`, `scopes/`, `sandbox/`, `cli/`, or `conventions/` — all of these require a
-machine-readable contract or documented request semantics, and EnergyHub publishes neither.
-No vulnerability-disclosure or trust-center artifact: probes found no security.txt, no bug
-bounty, and no trust page.
-
-## Common Properties
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.energyhub.com/)
-- [Documentation](https://help.energyhub.com/home/en-us/) — knowledge base, article bodies Okta gated
-- [Platform](https://www.energyhub.com/edge-derms-platform/platform-overview)
-- [Integrations](https://www.energyhub.com/edge-derms-platform/utility-integrations)
-- [Partners](https://www.energyhub.com/der-partner-ecosystem)
-- [Signup](https://www.energyhub.com/der-partner-ecosystem/become-a-partner)
-- [Blog](https://www.energyhub.com/news-announcements)
-- [About](https://www.energyhub.com/company)
-- [Careers](https://www.energyhub.com/careers)
+- [Documentation](https://help.energyhub.com/home/en-us/)
 - [Support](https://www.energyhub.com/contact)
-- [Privacy Policy](https://www.energyhub.com/privacy-policy)
-- [GitHub Organization](https://github.com/energyhub)
-- [LinkedIn](https://www.linkedin.com/company/energyhub/)
+- [Blog](https://www.energyhub.com/news-announcements)
+- [Terms of service](https://www.energyhub.com/terms)
+- [Privacy policy](https://www.energyhub.com/privacy-policy)
+- [GitHub](https://github.com/energyhub)
 
-## Maintainers
+## API Evangelist rating
 
-- Kin Lane — kin@apievangelist.com
+**Kin Score 22.6** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 64.3 |
+| Contract quality | 0.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 2.6 |
+| Developer ergonomics | 28.6 |
+| Access clarity | 34.2 |
+
+**Agent readiness 2.5** — human-only
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 20.5** — Energy & Utilities
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/energyhub/](https://apis.io/providers/energyhub/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for EnergyHub: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/energyhub/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
